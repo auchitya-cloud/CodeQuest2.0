@@ -1,0 +1,126 @@
+/* @import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+} */
+
+@import "tailwindcss";
+
+/* ---------- CSS Variables (light defaults) ---------- */
+
+:root {
+    --background: #ffffff;
+    --foreground: #171717;
+    /* Accent + UI neutrals for tech/academia vibe (minimal blue) */
+    --accent: 16 185 129;
+    /* emerald-500 in rgb */
+    --muted: 113 113 122;
+    /* zinc-500 */
+    --card: 255 255 255;
+    /* white */
+    --card-border: 228 228 231;
+    /* zinc-200 */
+    /* Keep your Geist font vars from next/font */
+    --font-sans: var(--font-geist-sans);
+    --font-mono: var(--font-geist-mono);
+}
+
+
+/* Prefer class-based dark mode (manual toggle).
+   If no class is set, fall back to user's system preference. */
+
+.dark:root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+    --card: 24 24 27;
+    /* zinc-900 */
+    --card-border: 39 39 42;
+    /* zinc-800 */
+}
+
+
+/* Fallback when no .dark class is present */
+
+@media (prefers-color-scheme: dark) {
+     :root:not(.dark) {
+        --background: #0a0a0a;
+        --foreground: #ededed;
+        --card: 24 24 27;
+        --card-border: 39 39 42;
+    }
+}
+
+
+/* ---------- Base ---------- */
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+
+/* Tailwind helpers that we use in components */
+
+.container-max {
+    @apply mx-auto w-full max-w-7xl px-4 sm: px-6 lg: px-8;
+}
+
+.card {
+    background-color: rgb(var(--card) / 0.7);
+    border: 1px solid rgb(var(--card-border) / 0.7);
+    @apply rounded-2xl backdrop-blur shadow-sm;
+}
+
+
+/* Better focus ring */
+
+:focus-visible {
+    outline: 2px solid rgb(var(--accent) / 0.6);
+    outline-offset: 2px;
+}
+
+
+/* Buttons used in navbar/hero */
+
+.btn {
+    @apply inline-flex items-center gap-2 rounded-2xl px-4 py-2 text-sm font-medium shadow-sm transition active: scale-[0.98] border;
+    border-color: rgb(var(--card-border) / 0.6);
+    background-color: rgb(var(--card) / 0.8);
+}
+
+.btn-accent {
+    color: white;
+    background-color: rgb(var(--accent) / 0.9);
+    border-color: rgb(var(--accent));
+}
+
+.btn-hover:hover {
+    @apply bg-zinc-50 dark: bg-zinc-900;
+}
